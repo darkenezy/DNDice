@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>DNDice</title>
+        <link rel="stylesheet" href="static/style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+
+    <body>
+        <div class="canvas"></div>
+        <div style="position: relative; z-index: 99;">
+            {% for button in [4, 6, 8, 10, 12, 20, 50] %}
+            <button class="addDiceButton" id="D{{ button }}">Add D{{ button }}</button>
+            {% endfor %}
+            <button id="rollButton">Roll</button>
+        </div>
+
+    </body>
+    <script type="text/javascript" src="static/script.js"></script>
+</html>
