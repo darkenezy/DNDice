@@ -1,12 +1,34 @@
+.body {
+    display: flex;
+    flex-direction: column;
+}
+
 .canvas {
     display: flex;
     width: 100%;
-    height: 90%;
+    height: 85vh;
     flex-wrap: wrap;
 }
 
-.dice_container {
-    width: 20%;
+.bar {
+    display: flex;
+    height: 10vh;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    width: 50vw;
+}
+
+.buttonContainer {
+   width: 10vh;
+   margin-right: 2vw;
+   margin-botton: 2vw;
+}
+
+.diceContainer {
+    width: 20vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -15,15 +37,25 @@
 }
 
 .dice {
-    height: 100px;
-    width: 100px;
+    height: 10vw;
+    width: 10vw;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
 }
-
 .roll {
     color: white;
-    font-size: 80px;
+    font-size: 9vw;
+}
+
+.type {
+    font-family: sans-serif;
+    opacity: 0.6;
+    z-index: -1;
+}
+
+.total {
+    font-size: 10vw;
+    margin-right: 2vw;
 }

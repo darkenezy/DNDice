@@ -1,3 +1,4 @@
 flask
 pydash
+seaborn
 gunicorn

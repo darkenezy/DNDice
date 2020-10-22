@@ -7,11 +7,22 @@
 
     <body>
         <div class="canvas"></div>
-        <div style="position: relative; z-index: 99;">
-            {% for button in [4, 6, 8, 10, 12, 20, 50] %}
-            <button class="addDiceButton" id="D{{ button }}">Add D{{ button }}</button>
-            {% endfor %}
-            <button id="rollButton">Roll</button>
+        <div class="bar">
+            <div class="buttons">
+                {% for button in [4, 6, 8, 10, 12, 20, 50] %}
+                <div class="buttonContainer">
+                    <button class="addDiceButton" id="D{{ button }}">Add D{{ button }}</button>
+                </div>
+                {% endfor %}
+                <div class="buttonContainer">
+                    <button id="clearAllButton">Clear all</button>
+                </div>
+                <div class="buttonContainer">
+                    <button id="rollButton">Roll</button>
+                </div>
+            </div>
+            <div class="total">TOTAL:</div>
+            <div id="counter" class="total">?</div>
         </div>
 
     </body>
