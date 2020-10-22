@@ -68,7 +68,7 @@ def remove_dice(dice_id):
 def roll_dice():
     auth_code = get_auth_code(request)
     if not auth_code:
-        return redirect("/api/v1/auth", status=401)
+        return redirect("/api/v1/auth")
 
     db[auth_code] = db.get(auth_code, OrderedDict())
     for dice_id in db[auth_code]:
