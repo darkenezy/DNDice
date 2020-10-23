@@ -1,3 +1,4 @@
+// Add dice
 $(".addDiceButton").click(function(){
     dice_desc = $(this).attr("id")
     $.ajax({
@@ -9,10 +10,10 @@ $(".addDiceButton").click(function(){
             $("#counter").text("?");
             drawDice(data);
         }
-
     });
 });
 
+// Roll & get new dice
 $("#rollButton").click(function(){
     if($('.dice').length==0) {
         return;
@@ -35,6 +36,7 @@ $("#rollButton").click(function(){
     });
 });
 
+// Clear the canvas
 $("#clearAllButton").click(function(){
     if($('.diceContainer').length==0) {
         return;
@@ -55,6 +57,7 @@ $("#clearAllButton").click(function(){
     }, 150);
 });
 
+// Draw one dice
 function drawDice(data, hide_roll=false) {
     dice_id = data.dice_id
     dice_desc = data.dice_desc
@@ -83,25 +86,24 @@ function drawDice(data, hide_roll=false) {
     $(".canvas").append(container);
     return value;
 }
-function refreshDice() {
-    $.get("/api/v1/get_dice").done(function(data){
-        $(".canvas").empty();
-        let total = 0;
 
-        for (let id in data) {
-            value = drawDice(data[id], hide_roll=true);
-            if(total != "?") {
-                if(value != "?") {
-                    total += value;
-                }
-                else {
-                    total = "?";
-                }
+// Re-draw the canvas
+function refreshDice(data) {
+    $(".canvas").empty();
+    let total = 0;
+
+    for (let id in data) {
+        value = drawDice(data[id], hide_roll=true);
+        if(total != "?") {
+            if(value != "?") {
+                total += value;
+            }
+            else {
+                total = "?";
             }
         }
-        $(".roll").fadeIn(150, function(){ $("#counter").text(total); });
-
-    })
+    }
+    $(".roll").fadeIn(150, function(){ $("#counter").text(total); });
 }
 
 $(".canvas").on('click', ".dice", function(event){
@@ -114,7 +116,9 @@ $(".canvas").on('click', ".dice", function(event){
     });
 });
 
-$(document).ready(refreshDice);
+$(document).ready(function() {
+    $.get("/api/v1/get_dice").done(refreshDice);
+});
 
 
 
