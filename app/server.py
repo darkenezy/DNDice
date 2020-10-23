@@ -54,7 +54,7 @@ def remove_dice(auth_code, dice_id):
         return Response("OK", 204)
     document = db[auth_code].find_one(ObjectId(dice_id))
     if document:
-        db[auth_code].delete_one(ObjectId(dice_id))
+        db[auth_code].delete_one({"_id": ObjectId(dice_id)})
         return Response("OK", 204)
     return Response("Invalid dice_id", 400)
 

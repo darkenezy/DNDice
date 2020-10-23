@@ -49,6 +49,7 @@ $("#clearAllButton").click(function(){
             url: "/api/v1/remove_dice/all",
             success: function() {
                 $("#counter").text("?");
+                $(".canvas").empty()
             },
             error: function() {
                 $(".diceContainer").show();
