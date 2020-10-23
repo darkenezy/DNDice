@@ -79,7 +79,8 @@ def roll_dice():
         dice.roll()
         db[auth_code][dice_id] = dice.to_representation()
 
-    return Response("OK", 200)
+    response = list(db.get(auth_code, OrderedDict()).values())
+    return jsonify(response), 200
 
 
 @app.route("/game")
