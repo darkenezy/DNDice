@@ -59,7 +59,7 @@ $("#clearAllButton").click(function(){
 
 // Draw one dice
 function drawDice(data, hide_roll=false) {
-    dice_id = data.dice_id
+    dice_id = data._id
     dice_desc = data.dice_desc
     color = data.color
     value = data.value
