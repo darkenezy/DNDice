@@ -3,8 +3,7 @@ import random
 
 
 class Dice:
-    def __init__(self, dice_id, dice_desc="", value="?", color=None):
-        self._dice_id = dice_id
+    def __init__(self, dice_desc="", value="?", color=None, **kwargs):
         self._desc = dice_desc
         self._value = value
         self._color = color
@@ -26,7 +25,6 @@ class Dice:
 
     def to_representation(self):
         return {
-            "dice_id": self._dice_id,
             "dice_desc": self._desc,
             "value": self._value,
             "color": self._color

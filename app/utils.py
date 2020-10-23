@@ -1,3 +1,5 @@
+from flask import request, redirect
+from functools import wraps
 import seaborn as sns
 import random
 
@@ -20,3 +22,17 @@ def get_auth_code(request, allow_create=False):
     if allow_create and not auth_code:
         auth_code = str(random.randint(10000, 99999))
     return auth_code
+
+
+def auth_required(allow_create=False):
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            auth_code = get_auth_code(request, allow_create)
+            if not auth_code:
+                return redirect("/api/v1/auth", status=401)
+            return func(auth_code, *args, **kwargs)
+        return wrapper
+    return decorator
+
+

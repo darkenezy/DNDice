@@ -1,4 +1,0 @@
-flask
-pydash
-seaborn
-gunicorn
