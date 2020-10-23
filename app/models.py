@@ -3,8 +3,9 @@ import random
 
 
 class Dice:
-    def __init__(self, desc, value="?", color=None):
-        self._desc = desc or ""
+    def __init__(self, dice_id, dice_desc="", value="?", color=None):
+        self._dice_id = dice_id
+        self._desc = dice_desc
         self._value = value
         self._color = color
         self._faces = None
@@ -24,4 +25,9 @@ class Dice:
         return self._value
 
     def to_representation(self):
-        return {"desc": self._desc, "value": self._value, "color": self._color}
+        return {
+            "dice_id": self._dice_id,
+            "dice_desc": self._desc,
+            "value": self._value,
+            "color": self._color
+        }
