@@ -1,6 +1,7 @@
 from flask import Flask, Response, request, redirect, jsonify, render_template
 from collections import OrderedDict
 import pydash as _
+import random
 
 from models import Dice
 from utils import ColorFactory, get_auth_code
@@ -27,7 +28,7 @@ def get_dice():
     if not auth_code:
         return redirect("/api/v1/auth", status=401)
 
-    response = db.get(auth_code, OrderedDict())
+    response = list(db.get(auth_code, OrderedDict()).values())
     return jsonify(response), 200
 
 
@@ -37,23 +38,24 @@ def add_dice():
     if not auth_code:
         return redirect("/api/v1/auth")
 
-    dice_id, dice_desc = _.at(request.json, "dice_id", "dice_desc")
+    dice_id = str(random.randint(100000, 999999))
+    dice_desc = request.json["dice_desc"]
     color = color_factory.get_color()
 
-    dice = Dice(dice_desc, color=color)
+    dice = Dice(dice_id=dice_id, dice_desc=dice_desc, color=color)
     if not dice.is_valid():
         return Response("Invalid dice description", 400)
 
     db[auth_code] = db.get(auth_code, OrderedDict())
     db[auth_code][dice_id] = dice.to_representation()
-    return Response("OK", 201)
+    return jsonify(db[auth_code][dice_id]), 201
 
 
 @app.route("/api/v1/remove_dice/<dice_id>", methods=["DELETE"])
 def remove_dice(dice_id):
     auth_code = get_auth_code(request)
     if not auth_code:
-        return redirect("/api/v1/auth", status=401)
+        return redirect("/api/v1/auth"), 401
 
     if dice_id == "all":
         db[auth_code].clear()
