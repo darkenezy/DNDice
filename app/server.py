@@ -1,5 +1,4 @@
 from flask import Flask, Response, request, redirect, jsonify, render_template
-from collections import OrderedDict
 from bson import ObjectId
 import pydash as _
 
