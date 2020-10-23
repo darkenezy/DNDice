@@ -1,0 +1,5 @@
+flask
+pydash
+pymongo
+seaborn
+gunicorn

@@ -2,5 +2,13 @@ version: "3.3"
 services:
   webapp:
     build: .
+    container_name: webapp
     ports:
     - 8080:8000
+  mongo:
+    container_name: mongo
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongodb_data:/data/db
