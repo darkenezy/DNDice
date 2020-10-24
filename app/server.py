@@ -14,8 +14,8 @@ db = MongoClient("mongo:27017").dices
 
 
 # Api section
-@auth_required(allow_create=True)
 @app.route("/api/v1/auth")
+@auth_required(allow_create=True)
 def authorize(auth_code):
     response = redirect("/game")
     response.set_cookie("auth_code", auth_code)

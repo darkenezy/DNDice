@@ -30,7 +30,7 @@ def auth_required(allow_create=False):
         def wrapper(*args, **kwargs):
             auth_code = get_auth_code(request, allow_create)
             if not auth_code:
-                return redirect("/api/v1/auth"), 401
+                return redirect("/api/v1/auth")
             return func(auth_code, *args, **kwargs)
         return wrapper
     return decorator
